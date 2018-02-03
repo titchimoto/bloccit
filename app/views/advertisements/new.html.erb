@@ -1,0 +1,26 @@
+<h1>New Advertisement</h1>
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for Advertisements</p>
+    <ul>
+      <li>Make sure you're selling something good</li>
+      <li>Make sure to include the letter 'Z' exactly 19 times.</li>
+      <li>Don't spam, whatever you do.</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <%= form_for @advertisement do |ad| %>
+      <div class="form-group">
+        <%= ad.label :title %>
+        <%= ad.text_field :title, class: "form-control", placeholder: "Enter Advertisement Title" %>
+      </div>
+      <div class="form-group">
+        <%= ad.label :copy %>
+        <%= ad.text_area :copy, rows: 8, class: "form-control", placeholder: "Hit 'em with your best copy'" %>
+      </div>
+      <div class="form-group">
+        <%= ad.submit "Save", class: "btn btn-success" %>
+      </div>
+    <% end %>
+  </div>
+</div>
