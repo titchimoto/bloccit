@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Question, type: :model do
-  let(:question) { Question.create!(title: "New Question Title", body: "New Question Body", resolved: false) }
+  let (:question) { Question.create!(title: "New Question Title", body: "New Question Body", resolved: false) }
 
   describe "attributes" do
     it "has title body and resolved attributes" do
