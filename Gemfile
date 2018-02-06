@@ -48,4 +48,6 @@ source 'https://rubygems.org'
   gem 'rails-controller-testing'
   gem 'shoulda'
   end
+
+  gem 'bcrypt'
  end
