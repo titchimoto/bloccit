@@ -22,6 +22,7 @@ end
 
 admin = User.create!(name: "Admin user", email: "admin@example.com", password: "password", role: "admin")
 member = User.create!(name: "Member user", email: "member@example.com", password: "password")
+moderator = User.create!(name: "Moderator user", email: "moderator@example.com", password: "password", role: "moderator")
 
 puts "Seed Finished"
 puts "#{User.count} users created"
