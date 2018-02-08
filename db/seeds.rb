@@ -20,8 +20,8 @@ posts = Post.all
   Comment.create!(post: posts.sample, body: RandomData.random_paragraph)
 end
 
-user = User.first
-user.update_attributes!(email: "titch@hotmail.co.uk", password: "motomoto")
+admin = User.create!(name: "Admin user", email: "admin@example.com", password: "password", role: "admin")
+member = User.create!(name: "Member user", email: "member@example.com", password: "password")
 
 puts "Seed Finished"
 puts "#{User.count} users created"
