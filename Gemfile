@@ -50,4 +50,5 @@ source 'https://rubygems.org'
   end
 
   gem 'bcrypt'
+  gem 'figaro', '1.0'
  end
