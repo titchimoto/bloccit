@@ -1,0 +1,7 @@
+New post created: "<%= @post.title %>"
+
+ By: <%= @post.user.name %>
+
+ You are now following this post and will receive any comment updates straight to your inbox!
+
+ Visit online at: <%= topic_post_url(@post.topic, @post) %>
