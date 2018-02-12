@@ -1,0 +1,13 @@
+<% @user.favorites.each do |fav| %>
+  <div class="media-body">
+    <h4 class="media-heading">
+      <%= image_tag fav.post.user.avatar_url(48) %>
+      <%= link_to fav.post.title, topic_post_path(fav.post.topic, fav.post) %>
+    </h4>
+    <small>
+      submitted <%= time_ago_in_words(fav.post.created_at) %> ago by <%= fav.post.user.name %> <br>
+      <%= pluralize(fav.post.comments.count, 'Comment') %> <br>
+      <%= pluralize(fav.post.points, 'Vote') %>
+    </small>
+  </div>
+<% end %>

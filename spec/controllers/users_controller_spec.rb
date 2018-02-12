@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  let(:user) { create(:user) }
+  let(:post) { create(:post) }
+  let(:topic) { create(:topic) }
 
   let (:new_user_attributes) do
-    { name: "TheoDeane", email: "theo@meowmeow.com", password: "meowmeow", passowrd_confirmation: "meowmeow" }
+    { name: "TheoDeane", email: "theo@meowmeow.com", password: "meowmeow", password_confirmation: "meowmeow" }
   end
 
     describe "GET new" do
@@ -16,6 +19,42 @@ RSpec.describe UsersController, type: :controller do
         get :new
         expect(assigns(:user)).to_not be_nil
       end
+    end
+
+    describe "GET show" do
+      it "returns http success" do
+        get :show, params: { id: user.id }
+        expect(response).to have_http_status(:success)
+      end
+
+       it "renders the #show view" do
+         get :show, params: { id: user.id }
+         expect(response).to render_template :show
+       end
+
+       it "returns the users posts" do
+         get :show, params: { id: user.id }
+         user.posts.create!(title: "testingtitle", body: "Testing the body of a post", topic: topic)
+         expect(user.posts.count).to eq(1)
+         expect(user.posts.last.user_id).to eq(user.id)
+       end
+
+       it "returns the users comments" do
+         get :show, params: { id: user.id }
+         user.comments.create!(body: "Testing comment body", post: post)
+         user.comments.create!(body: "Testing comment body again", post: post)
+         expect(user.comments.count).to eq(2)
+         expect(user.comments.last.user_id).to eq(user.id)
+       end
+
+       it "returns the users favorites" do
+         get :show, params: { id: user.id }
+         user.favorites.create!(user: user, post: post)
+         user.favorites.create!(user: user, post: post)
+         expect(user.favorites.count).to eq(2)
+         expect(user.favorites.last.user_id).to eq(user.id)
+       end
+
     end
 
     describe "POST create" do
