@@ -5,6 +5,7 @@ RSpec.describe UsersController, type: :controller do
   let(:post) { create(:post) }
   let(:topic) { create(:topic) }
 
+
   let (:new_user_attributes) do
     { name: "TheoDeane", email: "theo@meowmeow.com", password: "meowmeow", password_confirmation: "meowmeow" }
   end
@@ -34,25 +35,12 @@ RSpec.describe UsersController, type: :controller do
 
        it "returns the users posts" do
          get :show, params: { id: user.id }
-         user.posts.create!(title: "testingtitle", body: "Testing the body of a post", topic: topic)
-         expect(user.posts.count).to eq(1)
-         expect(user.posts.last.user_id).to eq(user.id)
+         expect(assigns(:posts)).to eq(user.posts)
        end
 
        it "returns the users comments" do
          get :show, params: { id: user.id }
-         user.comments.create!(body: "Testing comment body", post: post)
-         user.comments.create!(body: "Testing comment body again", post: post)
-         expect(user.comments.count).to eq(2)
-         expect(user.comments.last.user_id).to eq(user.id)
-       end
-
-       it "returns the users favorites" do
-         get :show, params: { id: user.id }
-         user.favorites.create!(user: user, post: post)
-         user.favorites.create!(user: user, post: post)
-         expect(user.favorites.count).to eq(2)
-         expect(user.favorites.last.user_id).to eq(user.id)
+         expect(assigns(:comments)).to eq(user.comments)
        end
 
     end
